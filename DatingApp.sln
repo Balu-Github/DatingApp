@@ -3,7 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.API", "DatingApp.API\DatingApp.API.csproj", "{878B463A-29E9-4010-8EC6-757B5C768764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingApp.API", "DatingApp.API\DatingApp.API.csproj", "{878B463A-29E9-4010-8EC6-757B5C768764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.Contracts", "DatingApp.Contracts\DatingApp.Contracts.csproj", "{0D2F0EC0-91EF-4ACE-9ED1-8941838D4C45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.Data", "DatingApp.Data\DatingApp.Data.csproj", "{5C3D590E-CBCF-48F3-84C3-7AD9600B54C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.DTO", "DatingApp.DTO\DatingApp.DTO.csproj", "{BC2644E5-CE35-4C0C-961A-EBA6F727A685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.Repo", "DatingApp.Repo\DatingApp.Repo.csproj", "{956F951D-DE00-4C85-BB0E-6889C7CFC998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.Services", "DatingApp.Services\DatingApp.Services.csproj", "{C40F71AC-5D59-48A3-A9B1-7082C8A6E4B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.Util", "DatingApp.Util\DatingApp.Util.csproj", "{B98CB117-3761-4202-BF8D-E96036FC2F03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution files", "solution files", "{A737853F-0EBD-44F3-A246-1E170F9B395E}"
+	ProjectSection(SolutionItems) = preProject
+		DatingApp.API\.gitignore = DatingApp.API\.gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +32,30 @@ Global
 		{878B463A-29E9-4010-8EC6-757B5C768764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{878B463A-29E9-4010-8EC6-757B5C768764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{878B463A-29E9-4010-8EC6-757B5C768764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D2F0EC0-91EF-4ACE-9ED1-8941838D4C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D2F0EC0-91EF-4ACE-9ED1-8941838D4C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D2F0EC0-91EF-4ACE-9ED1-8941838D4C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D2F0EC0-91EF-4ACE-9ED1-8941838D4C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C3D590E-CBCF-48F3-84C3-7AD9600B54C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3D590E-CBCF-48F3-84C3-7AD9600B54C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3D590E-CBCF-48F3-84C3-7AD9600B54C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3D590E-CBCF-48F3-84C3-7AD9600B54C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC2644E5-CE35-4C0C-961A-EBA6F727A685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC2644E5-CE35-4C0C-961A-EBA6F727A685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC2644E5-CE35-4C0C-961A-EBA6F727A685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC2644E5-CE35-4C0C-961A-EBA6F727A685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{956F951D-DE00-4C85-BB0E-6889C7CFC998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{956F951D-DE00-4C85-BB0E-6889C7CFC998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{956F951D-DE00-4C85-BB0E-6889C7CFC998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{956F951D-DE00-4C85-BB0E-6889C7CFC998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C40F71AC-5D59-48A3-A9B1-7082C8A6E4B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C40F71AC-5D59-48A3-A9B1-7082C8A6E4B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C40F71AC-5D59-48A3-A9B1-7082C8A6E4B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C40F71AC-5D59-48A3-A9B1-7082C8A6E4B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98CB117-3761-4202-BF8D-E96036FC2F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98CB117-3761-4202-BF8D-E96036FC2F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98CB117-3761-4202-BF8D-E96036FC2F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98CB117-3761-4202-BF8D-E96036FC2F03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
