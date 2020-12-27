@@ -20,10 +20,11 @@ namespace DatingApp.API.Controllers
             _userService = userService;
         }
 
+        [AllowAnonymous]
         [HttpGet]        
         public async Task<IActionResult> Get()
         {
-            var values = await _userService.GetUsers();
+            var values = new string[] { "value1", "value2", "value3" };
             return Ok(values);
         }
 

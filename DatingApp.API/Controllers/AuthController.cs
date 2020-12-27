@@ -1,5 +1,6 @@
 ﻿using DatingApp.Contracts;
 using DatingApp.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -12,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -47,6 +48,7 @@ namespace DatingApp.API.Controllers
             return StatusCode(201);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
