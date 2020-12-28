@@ -13,7 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
-{   
+{
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -38,7 +39,7 @@ namespace DatingApp.API.Controllers
             if(await _authService.UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exsits");
 
-            var userToCreate = new UserDTO()
+            var userToCreate = new UserForRegisterDto()
             {
                 Username = userForRegisterDto.Username
             };
@@ -47,8 +48,7 @@ namespace DatingApp.API.Controllers
 
             return StatusCode(201);
         }
-
-        [AllowAnonymous]
+        
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {

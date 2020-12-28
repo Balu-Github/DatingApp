@@ -6,5 +6,6 @@ namespace DatingApp.Contracts
 {
     public interface IUserRepo : IGenericRepo<User>
     {
+       void SeedUsers();
     }
 }

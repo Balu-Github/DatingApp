@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 namespace DatingApp.Contracts
 {
     public interface IAuthService
-    {
-        Task<ICollection<UserDTO>> GetUsers();
+    {        
+        Task<UserForLoginDto> Register(UserForRegisterDto user, string password);
 
-        Task<UserDTO> Register(UserDTO user, string password);
-
-        Task<UserDTO> Login(string username, string password);
+        Task<UserForLoginDto> Login(string username, string password);
 
         Task<bool> UserExists(string username);
     }

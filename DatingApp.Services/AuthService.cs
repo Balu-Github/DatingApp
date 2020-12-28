@@ -1,8 +1,6 @@
 ﻿using DatingApp.Contracts;
 using DatingApp.Data;
 using DatingApp.DTO;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,24 +11,13 @@ namespace DatingApp.Services
     public class AuthService : IAuthService
     {
         private readonly IUserRepo _userRepo;
-
         public AuthService(
             IUserRepo userRepo)
         {
             _userRepo = userRepo;
-        }
+        }        
 
-        public async Task<ICollection<UserDTO>> GetUsers()
-        {
-            var allUsers = (await _userRepo.GetAll()).Select(u => new UserDTO()
-            {
-                Id = u.Id,
-                Username = u.Username
-            }).ToList();
-            return allUsers;
-        }
-
-        public async Task<UserDTO> Login(string username, string password)
+        public async Task<UserForLoginDto> Login(string username, string password)
         {
             var user = (await _userRepo.Find(u => u.Username == username)).FirstOrDefault();
 
@@ -38,7 +25,7 @@ namespace DatingApp.Services
                 return null;
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
-            return new UserDTO() { Id = user.Id, Username = user.Username };
+            return new UserForLoginDto() { Id = user.Id, Username = user.Username };
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -54,8 +41,11 @@ namespace DatingApp.Services
             }
         }
 
-        public async Task<UserDTO> Register(UserDTO user, string password)
+        public async Task<UserForLoginDto> Register(UserForRegisterDto user, string password)
         {
+            //Seed users Data
+            //_userRepo.SeedUsers();
+
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
             var _user = new User()
@@ -63,10 +53,9 @@ namespace DatingApp.Services
                 Username = user.Username,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
-            };           
+            };
             var savedUser = await _userRepo.Add(_user);
-            user.Id = savedUser.Id;          
-            return user;
+            return new UserForLoginDto() { Id = savedUser.Id, Username = user.Username };
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

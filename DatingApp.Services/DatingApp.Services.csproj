@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DatingApp.Contracts\DatingApp.Contracts.csproj" />
+    <ProjectReference Include="..\DatingApp.Util\DatingApp.Util.csproj" />
   </ItemGroup>
 
 </Project>

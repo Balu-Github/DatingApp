@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DatingApp.API.Data;
 using DatingApp.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,14 +25,6 @@ namespace DatingApp.API.Controllers
         {           
             var values = new string[] { "value1", "value2", "value3" };
             return Ok(values);
-        }
-
-        [AllowAnonymous]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            var values = await _userService.GetUsers();
-            return Ok(values);
-        }
+        }        
     }
 }

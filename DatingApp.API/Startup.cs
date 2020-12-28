@@ -1,4 +1,4 @@
-using DatingApp.API.Data;
+using AutoMapper;
 using DatingApp.Contracts;
 using DatingApp.Contracts.Generic;
 using DatingApp.Data;
@@ -47,9 +47,12 @@ namespace DatingApp.API
                 x.UseLazyLoadingProxies();
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));               
              });
-                        
-            services.AddControllers();
+
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
+
+            //AutoMapper
+            services.AddAutoMapper(typeof(UserService).Assembly);
 
             //DI
             services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
@@ -57,6 +60,7 @@ namespace DatingApp.API
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<IUserService, UserService>();
 
             //Authenticaion
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -77,17 +81,17 @@ namespace DatingApp.API
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
                 // TODO: need to remove
-                app.UseExceptionHandler(builder => builder.Run(async context => {
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    var error = context.Features.Get<IExceptionHandlerFeature>();
-                    if (error != null)
-                    {
-                        context.Response.AddApplicationError(error.Error.Message);
-                        await context.Response.WriteAsync(error.Error.Message);
-                    }
-                }));
+                //app.UseExceptionHandler(builder => builder.Run(async context => {
+                //    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                //    var error = context.Features.Get<IExceptionHandlerFeature>();
+                //    if (error != null)
+                //    {
+                //        context.Response.AddApplicationError(error.Error.Message);
+                //        await context.Response.WriteAsync(error.Error.Message);
+                //    }
+                //}));
             }
             else
             {

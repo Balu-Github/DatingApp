@@ -7,6 +7,7 @@ namespace DatingApp.DTO
 {
     public class UserForRegisterDto
     {
+
         [Required]
         public string Username { get; set; }
 
