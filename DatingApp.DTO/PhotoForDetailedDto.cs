@@ -12,5 +12,6 @@ namespace DatingApp.DTO
         public DateTime DateAdded { get; set; }
         public bool IsMain { get; set; }        
         public int UserId { get; set; }
+        public string PublicId { get; set; }
     }
 }

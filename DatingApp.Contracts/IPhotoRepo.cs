@@ -4,8 +4,8 @@ using System;
 
 namespace DatingApp.Contracts
 {
-    public interface IPhotoRepo : IGenericRepo<Photo>
+    public interface IUserRepo : IGenericRepo<User>
     {
-       //void SeedUsers();
+       void SeedUsers();
     }
 }

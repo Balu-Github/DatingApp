@@ -40,7 +40,7 @@ namespace DatingApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)        
         {
-            //services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            
 
             services.AddDbContext<DatingAppContext>(x =>
             {
@@ -50,6 +50,9 @@ namespace DatingApp.API
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
+
+            // CloudinarySettings
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
             //AutoMapper
             services.AddAutoMapper(typeof(UserService).Assembly);
@@ -61,6 +64,8 @@ namespace DatingApp.API
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPhotoRepo, PhotoRepo>();
+            services.AddScoped<IPhotoService, PhotoService>();
 
             //Authenticaion
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

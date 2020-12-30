@@ -1,4 +1,5 @@
-﻿using DatingApp.Contracts;
+﻿using AutoMapper;
+using DatingApp.Contracts;
 using DatingApp.Data;
 using DatingApp.DTO;
 using System.Linq;
@@ -11,10 +12,14 @@ namespace DatingApp.Services
     public class AuthService : IAuthService
     {
         private readonly IUserRepo _userRepo;
+        private readonly IMapper _mapper;
+
         public AuthService(
-            IUserRepo userRepo)
+            IUserRepo userRepo
+            , IMapper mapper)
         {
             _userRepo = userRepo;
+            _mapper = mapper;
         }        
 
         public async Task<UserForLoginDto> Login(string username, string password)
@@ -25,7 +30,8 @@ namespace DatingApp.Services
                 return null;
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
-            return new UserForLoginDto() { Id = user.Id, Username = user.Username };
+            var userForLogin = _mapper.Map<UserForLoginDto>(user);
+            return userForLogin;
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
