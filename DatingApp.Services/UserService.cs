@@ -36,5 +36,17 @@ namespace DatingApp.Services
             var _user = _mapper.Map<UserForDetailedDto>(user);
             return _user;
         }
+
+        public async Task<UserForUpdateDto> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        {
+            var user = await _userRepo.GetById(id);
+
+            if (user == null)
+                return null;
+
+            _mapper.Map(userForUpdateDto, user);
+            await _userRepo.Edit(user);
+            return userForUpdateDto;
+        }
     }
 }
