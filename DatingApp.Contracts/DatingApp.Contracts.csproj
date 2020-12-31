@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DatingApp.Data\DatingApp.Data.csproj" />
     <ProjectReference Include="..\DatingApp.DTO\DatingApp.DTO.csproj" />
+    <ProjectReference Include="..\DatingApp.Util\DatingApp.Util.csproj" />
   </ItemGroup>
 
 </Project>

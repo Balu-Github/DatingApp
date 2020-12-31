@@ -44,7 +44,7 @@ namespace DatingApp.Services
 
         public async Task<PhotoForDetailedDto> AddPhoto(int userId, PhotoCreationDto photoCreationDto)
         {
-            var user = await _userRepo.GetById(userId);
+            var user = await _userRepo.GetUserById(userId);
 
             var file = photoCreationDto.File;
             var uploadResult = new ImageUploadResult();
