@@ -8,7 +8,7 @@ namespace DatingApp.Contracts
 {
     public interface IAuthService
     {        
-        Task<UserForLoginDto> Register(UserForRegisterDto user, string password);
+        Task<UserForDetailedDto> Register(UserForRegisterDto user, string password);
 
         Task<UserForLoginDto> Login(string username, string password);
 

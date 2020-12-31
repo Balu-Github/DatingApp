@@ -47,21 +47,18 @@ namespace DatingApp.Services
             }
         }
 
-        public async Task<UserForLoginDto> Register(UserForRegisterDto user, string password)
+        public async Task<UserForDetailedDto> Register(UserForRegisterDto user, string password)
         {
             //Seed users Data
             //_userRepo.SeedUsers();
 
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            var _user = new User()
-            {
-                Username = user.Username,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
-            };
+            var _user = _mapper.Map<User>(user);
+            _user.PasswordHash = passwordHash;
+            _user.PasswordSalt = passwordSalt;          
             var savedUser = await _userRepo.Add(_user);
-            return new UserForLoginDto() { Id = savedUser.Id, Username = user.Username };
+            return _mapper.Map<UserForDetailedDto>(savedUser);
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

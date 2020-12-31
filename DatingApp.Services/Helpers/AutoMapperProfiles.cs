@@ -28,6 +28,7 @@ namespace DatingApp.Services.Helpers
             CreateMap<User, UserForLoginDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<PhotoCreationDto, Photo>();
+            CreateMap<UserForRegisterDto, User>();
         }
     }
 }
