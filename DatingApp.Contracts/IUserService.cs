@@ -9,9 +9,8 @@ namespace DatingApp.Contracts
     public interface IUserService
     {
         Task<IEnumerable<UserForListDto>> GetUsers();
-
         Task<UserForDetailedDto> GetUser(int id);
-
         Task<UserForUpdateDto> UpdateUser(int id, UserForUpdateDto userForUpdateDto);
+        Task UpdateUserActivity(int userId);
     }
 }

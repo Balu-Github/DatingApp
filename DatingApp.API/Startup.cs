@@ -1,4 +1,5 @@
 using AutoMapper;
+using DatingApp.API.Helpers;
 using DatingApp.Contracts;
 using DatingApp.Contracts.Generic;
 using DatingApp.Data;
@@ -79,6 +80,7 @@ namespace DatingApp.API
                        ValidateAudience = false
                    };
                });
+            services.AddScoped<LogUserActivity>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

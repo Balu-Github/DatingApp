@@ -48,5 +48,12 @@ namespace DatingApp.Services
             await _userRepo.Edit(user);
             return userForUpdateDto;
         }
+
+        public async Task UpdateUserActivity(int userId)
+        {
+            var user = await _userRepo.GetById(userId);            
+            user.LastActive = DateTime.Now;
+            await _userRepo.Edit(user);            
+        }
     }
 }
