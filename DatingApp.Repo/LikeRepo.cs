@@ -1,9 +1,7 @@
 ﻿using DatingApp.Contracts;
 using DatingApp.Contracts.Generic;
 using DatingApp.Data;
-using DatingApp.Data.Data;
 using DatingApp.Repo.Generic;
-using System;
 
 namespace DatingApp.Repo
 {
