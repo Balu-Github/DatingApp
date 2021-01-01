@@ -27,8 +27,7 @@ namespace DatingApp.Repo
 
         public async Task<PagedList<User>> GetUsers(UserParams pageParams)
         {
-            var users = _unitOfWork.Context.Users.Include(p => p.Photos)
-                            .OrderByDescending(u => u.LastActive).AsQueryable();
+            var users = _unitOfWork.Context.Users.OrderByDescending(u => u.LastActive).AsQueryable();
 
             users = users.Where(u => u.Id != pageParams.UserId);
 
@@ -73,7 +72,7 @@ namespace DatingApp.Repo
 
         public async Task<User> GetUserById(int userId)
         {
-            return await _unitOfWork.Context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == userId);
+            return await _unitOfWork.Context.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<Like> GetLike(int userId,  int recipientId)
@@ -83,10 +82,8 @@ namespace DatingApp.Repo
 
         private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)
         {
-            var user = await _unitOfWork.Context.Users
-                                .Include(x => x.Likers)
-                                .Include(x => x.Likees)
-                                .FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _unitOfWork.Context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
             if(likers)
             {
                 return user.Likers.Where(u => u.LikeeId == id).Select(u => u.LikerId);

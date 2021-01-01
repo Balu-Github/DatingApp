@@ -9,10 +9,10 @@ namespace DatingApp.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Photo> Photos { get; set; }
-        public DbSet<Like> Likes { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<Like> Likes { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

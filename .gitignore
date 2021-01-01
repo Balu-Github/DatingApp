@@ -6,3 +6,5 @@ obj
 *.dll
 .vs
 Migrations
+wwwwroot
+.suo

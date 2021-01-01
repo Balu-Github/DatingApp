@@ -21,17 +21,12 @@ namespace DatingApp.Repo
 
         public async Task<Message> GetMessage(int id)
         {
-            return await _unitOfWork.Context.Messages
-                                .Include(u => u.Sender).ThenInclude(p => p.Photos)
-                                .Include(u => u.Recipient).ThenInclude(p => p.Photos).FirstOrDefaultAsync(m => m.Id == id);
+            return await _unitOfWork.Context.Messages.FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
-            var messages = _unitOfWork.Context.Messages
-                                .Include(u => u.Sender).ThenInclude(p => p.Photos)
-                                .Include(u => u.Recipient).ThenInclude(p => p.Photos)
-                                .AsQueryable();
+            var messages = _unitOfWork.Context.Messages.AsQueryable();
 
             switch (messageParams.MessageContainer)
             {
@@ -56,8 +51,6 @@ namespace DatingApp.Repo
         public async Task<IEnumerable<Message>> GetMessageTread(int userId, int recipientId)
         {
             var messages = await _unitOfWork.Context.Messages
-                                 .Include(u => u.Sender).ThenInclude(p => p.Photos)
-                                 .Include(u => u.Recipient).ThenInclude(p => p.Photos)
                                  .Where(m => m.RecipientId == userId && m.RecipientDeleted == false
                                         && m.SenderId == recipientId
                                     || m.RecipientId == recipientId && m.SenderId == userId

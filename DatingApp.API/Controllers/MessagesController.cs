@@ -92,6 +92,8 @@ namespace DatingApp.API.Controllers
             if (recipient == null)
                 return BadRequest("Could not find user");
 
+            var sender = await _userService.GetUser(messageForCreationDto.SenderId); //TODO: revisit the logic
+
             var message = _mapper.Map<Message>(messageForCreationDto);
 
             var savedMessge = await _messageRepo.Add(message);
