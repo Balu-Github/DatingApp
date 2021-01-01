@@ -31,7 +31,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery]PageParams pageParams)
+        public async Task<IActionResult> GetUsers([FromQuery]UserParams pageParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var userFromRepo = await _userService.GetUser(currentUserId);
@@ -70,6 +70,34 @@ namespace DatingApp.API.Controllers
                 return Unauthorized();
             else
                 return NoContent();           
+        }
+
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var like = await _userService.GetLike(id, recipientId);
+
+            if (like != null)
+                return BadRequest("You already like this user");
+
+            if (await _userService.GetUser(recipientId) == null)
+                return NotFound();
+
+            like = new LikeDto
+            {
+                LikerId = id,
+                LikeeId = recipientId
+            };
+
+           var savedLike =  await _userService.AddLike(like);
+
+            if (savedLike != null)
+                return Ok();
+
+            return BadRequest("Failed to like user");
         }
     }
 }

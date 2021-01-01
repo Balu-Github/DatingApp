@@ -11,16 +11,19 @@ namespace DatingApp.Services
     public class UserService : IUserService
     {
         private readonly IMapper _mapper;
+        private readonly ILikeRepo _likeRepo;
         private readonly IUserRepo _userRepo;
 
         public UserService(IUserRepo userRepo
+            , ILikeRepo likeRepo
             , IMapper mapper)
         {
             _userRepo = userRepo;
             _mapper = mapper;
+            _likeRepo = likeRepo;
         }
 
-        public async Task<PagedList<User>> GetUsers(PageParams pageParams)
+        public async Task<PagedList<User>> GetUsers(UserParams pageParams)
         {
             var users = await _userRepo.GetUsers(pageParams);
             return users;
@@ -51,6 +54,22 @@ namespace DatingApp.Services
             var user = await _userRepo.GetUserById(userId);            
             user.LastActive = DateTime.Now;
             await _userRepo.Edit(user);            
+        }
+
+        public async Task<LikeDto> GetLike(int userId, int recipientId)
+        {
+            var like = await _userRepo.GetLike(userId, recipientId);           
+            if (like == null)
+                return null;
+            var _like = _mapper.Map<LikeDto>(like);
+            return _like;
+        }
+
+        public async Task<LikeDto> AddLike(LikeDto likeDto)
+        {
+            var _like = _mapper.Map<Like>(likeDto);
+            await _likeRepo.Add(_like);        
+            return likeDto;
         }
     }
 }

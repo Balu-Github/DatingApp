@@ -1,6 +1,6 @@
 ﻿namespace DatingApp.Util.Helpers
 {
-    public class PageParams
+    public class UserParams
     {
         private const int MaxPageSize = 50; //Changed based Requirement
         public int PageNumber { get; set; } = 1;
@@ -17,5 +17,7 @@
         public int MinAge { get; set; } = 18;
         public int MaxAge { get; set; } = 99;
         public string OrderBy { get; set; }
+        public bool Likees { get; set; }
+        public bool Likers { get; set; }
     }
 }
