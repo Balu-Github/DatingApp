@@ -1,0 +1,10 @@
+bin
+obj
+.vscodegit
+
+*.db
+*.dll
+.vs
+Migrations
+wwwwroot
+.suo

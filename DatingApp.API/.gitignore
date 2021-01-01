@@ -1,5 +1,7 @@
 bin
 obj
-.vscode
+.vscodegit
+
 *.db
 *.dll
+wwwroot
