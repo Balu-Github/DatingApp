@@ -7,6 +7,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 //import { NgxGalleryModule } from 'ngx-gallery';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -69,6 +70,7 @@ export function tokenGetter() {
     TimeagoModule.forRoot(),
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
+    CarouselModule.forRoot(),
     //NgxGalleryModule,
     FileUploadModule,
     JwtModule.forRoot({

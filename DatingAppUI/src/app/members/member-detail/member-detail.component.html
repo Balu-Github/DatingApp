@@ -25,8 +25,8 @@
           </div>
         </div>
         <div class="card-footer">
-          <div class="btn-group d-flex"> 
-            <button class="btn btn-primary w-100">Like</button>
+          <div class="btn-group d-flex">
+            <button class="btn btn-primary w-100" (click)="sendLike(user.id)">Like</button>
             <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
           </div>
         </div>
@@ -37,19 +37,23 @@
           <tabset class="member-tabset" #memberTabs>
             <tab heading="About {{user.knownAs}}">
               <h4>Description</h4>
-              <p>{{user.introduction}}</p>
+              <textarea name="introduction" disabled rows="6" class="form-control" [innerText]="user.introduction"></textarea>             
               <h4>Looking For</h4>
-              <p>{{user.lookingFor}}</p>
+              <textarea name="lookingFor" disabled rows="6" class="form-control" [innerText]="user.lookingFor"></textarea>             
             </tab>
             <tab heading="Interests">
               <h4>Interests</h4>
-              <p>{{user.interests}}</p>              
+              <textarea name="interests" disabled rows="6" class="form-control" [innerText]="user.interests"></textarea> 
             </tab>
-            <tab heading="Photos">              
-              <p>Photos will go here..</p>              
+            <tab heading="Photos">
+              <carousel [(activeSlide)]="activeSlideIndex" >
+                <slide *ngFor="let slide of slides; let index=index">
+                  <img [src]="slide.url" alt="{{slide.description}}" class="img-carousel">                 
+                </slide>
+              </carousel>
             </tab>
-            <tab heading="Messages">              
-              <app-member-messages [recipientId]="user.id"></app-member-messages>        
+            <tab heading="Messages">
+              <app-member-messages [recipientId]="user.id"></app-member-messages>
             </tab>
           </tabset>
         </div>
