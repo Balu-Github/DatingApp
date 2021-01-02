@@ -37,13 +37,13 @@
           <tabset class="member-tabset" #memberTabs>
             <tab heading="About {{user.knownAs}}">
               <h4>Description</h4>
-              <p>{{user.introduction}}</p>
+              <textarea name="introduction" disabled rows="6" class="form-control" [innerText]="user.introduction"></textarea>             
               <h4>Looking For</h4>
-              <p>{{user.lookingFor}}</p>
+              <textarea name="lookingFor" disabled rows="6" class="form-control" [innerText]="user.lookingFor"></textarea>             
             </tab>
             <tab heading="Interests">
               <h4>Interests</h4>
-              <p>{{user.interests}}</p>
+              <textarea name="interests" disabled rows="6" class="form-control" [innerText]="user.interests"></textarea> 
             </tab>
             <tab heading="Photos">
               <carousel [(activeSlide)]="activeSlideIndex" >
