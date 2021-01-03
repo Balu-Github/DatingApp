@@ -4,7 +4,6 @@ using DatingApp.Contracts;
 using DatingApp.Data;
 using DatingApp.DTO;
 using DatingApp.Util.Helpers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,8 +12,7 @@ using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
 {
-    [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
+    [ServiceFilter(typeof(LogUserActivity))]   
     [Route("api/users/{userId}/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
@@ -87,12 +85,12 @@ namespace DatingApp.API.Controllers
 
             messageForCreationDto.SenderId = userId;
 
-            var recipient = await _userService.GetUser(messageForCreationDto.RecipientId);
+            var recipient = await _userService.GetUser(messageForCreationDto.RecipientId, true);
 
             if (recipient == null)
                 return BadRequest("Could not find user");
 
-            var sender = await _userService.GetUser(messageForCreationDto.SenderId); //TODO: revisit the logic
+            var sender = await _userService.GetUser(messageForCreationDto.SenderId, true); //TODO: revisit the logic
 
             var message = _mapper.Map<Message>(messageForCreationDto);
 

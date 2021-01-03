@@ -106,7 +106,7 @@ namespace DatingApp.Services
             return photo.IsMain;
         }
 
-        public async Task<bool> DeletePhoto(int userId, int id)
+        public async Task<bool> DeletePhoto(int id)
         {
             var photo = await _photoRepo.GetById(id);
 

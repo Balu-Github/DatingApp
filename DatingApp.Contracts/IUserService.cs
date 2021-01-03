@@ -8,7 +8,7 @@ namespace DatingApp.Contracts
     public interface IUserService
     {
         Task<PagedList<User>> GetUsers(UserParams pageParams);
-        Task<UserForDetailedDto> GetUser(int id);
+        Task<UserForDetailedDto> GetUser(int id, bool isCurrentUser);
         Task<UserForUpdateDto> UpdateUser(int id, UserForUpdateDto userForUpdateDto);
         Task UpdateUserActivity(int userId);
         Task<LikeDto> GetLike(int userId, int recipientId);

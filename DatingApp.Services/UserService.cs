@@ -4,6 +4,7 @@ using DatingApp.Data;
 using DatingApp.DTO;
 using DatingApp.Util.Helpers;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DatingApp.Services
@@ -29,9 +30,12 @@ namespace DatingApp.Services
             return users;
         }
 
-        public async Task<UserForDetailedDto> GetUser(int id)
+        public async Task<UserForDetailedDto> GetUser(int id, bool isCurrentUser)
         {
             var user = await _userRepo.GetUserById(id);
+
+            if (!isCurrentUser)
+                user.Photos = user.Photos.Where(p => p.IsApproved == true).ToList();
 
             var _user = _mapper.Map<UserForDetailedDto>(user);
             return _user;

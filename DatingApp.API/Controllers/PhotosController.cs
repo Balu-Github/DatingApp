@@ -1,13 +1,11 @@
 ﻿using DatingApp.Contracts;
 using DatingApp.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
-{
-    [Authorize]
+{   
     [Route("api/users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase
@@ -66,7 +64,7 @@ namespace DatingApp.API.Controllers
             if (await _photoService.IsMainPhoto(id))
                 return BadRequest("You cannot delete your main photo");
 
-            if (await _photoService.DeletePhoto(userId, id))
+            if (await _photoService.DeletePhoto(id))
                 return Ok();
             else
                 return BadRequest("Failed to delete a Photo");

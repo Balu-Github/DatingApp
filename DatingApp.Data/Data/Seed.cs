@@ -18,11 +18,11 @@ namespace DatingApp.Data.Data
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
                 foreach (var user in users)
                 {
-                    byte[] passwordHash, passwordSalt;
-                    CreatePasswordHash("password", out passwordHash, out passwordSalt);
-                    user.PasswordHash = passwordHash;
-                    user.PasswordSalt = passwordSalt;
-                    user.Username = user.Username.ToLower();
+                    //byte[] passwordHash, passwordSalt;
+                    //CreatePasswordHash("password", out passwordHash, out passwordSalt);
+                    //user.PasswordHash = passwordHash;
+                    //user.PasswordSalt = passwordSalt;
+                    user.UserName = user.UserName.ToLower();
                     context.Users.Add(user);
                 }
 

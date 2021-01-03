@@ -3,19 +3,14 @@ using DatingApp.API.Helpers;
 using DatingApp.Contracts;
 using DatingApp.DTO;
 using DatingApp.Util.Helpers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -34,7 +29,7 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> GetUsers([FromQuery]UserParams pageParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userFromRepo = await _userService.GetUser(currentUserId);
+            var userFromRepo = await _userService.GetUser(currentUserId, false);
             pageParams.UserId = currentUserId;
 
             if(string.IsNullOrEmpty(pageParams.Gender))
@@ -51,10 +46,13 @@ namespace DatingApp.API.Controllers
             return Ok(usersToReturn);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _userService.GetUser(id);
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
+
+            var user = await _userService.GetUser(id, isCurrentUser);
+
             return Ok(user);
         }
 
@@ -86,7 +84,7 @@ namespace DatingApp.API.Controllers
             if (like != null)
                 return BadRequest("You already like this user");
 
-            if (await _userService.GetUser(recipientId) == null)
+            if (await _userService.GetUser(recipientId, false) == null)
                 return NotFound();
 
             like = new LikeDto

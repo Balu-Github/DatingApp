@@ -1,46 +1,64 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace DatingApp.Data
 {
-    public partial class DatingAppContext : DbContext
+    public partial class DatingAppContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int> ,
+                            UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public DatingAppContext(DbContextOptions<DatingAppContext> options): base(options)
         {
         }
-
-        public virtual DbSet<User> Users { get; set; }
+        
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
 
-            modelBuilder.Entity<Like>()
+            builder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                  .WithMany(r => r.UserRoles)
+                  .HasForeignKey(ur => ur.RoleId)
+                  .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                  .WithMany(r => r.UserRoles)
+                  .HasForeignKey(ur => ur.UserId)
+                  .IsRequired();
+            });
+
+            builder.Entity<Like>()
                 .HasKey(k => new { k.LikerId, k.LikeeId });
 
-            modelBuilder.Entity<Like>()
+            builder.Entity<Like>()
                 .HasOne(u => u.Likee)
                 .WithMany(u => u.Likers)
                 .HasForeignKey(u => u.LikeeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Like>()
+            builder.Entity<Like>()
                .HasOne(u => u.Liker)
                .WithMany(u => u.Likees)
                .HasForeignKey(u => u.LikerId)
                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Message>()
+            builder.Entity<Message>()
                 .HasOne(u => u.Sender)
                 .WithMany(u => u.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Message>()
+            builder.Entity<Message>()
                .HasOne(u => u.Recipient)
                .WithMany(u => u.MessagesReceived)
-               .OnDelete(DeleteBehavior.Restrict);
+               .OnDelete(DeleteBehavior.Restrict);            
         }
     }
 }

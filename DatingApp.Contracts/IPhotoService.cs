@@ -13,6 +13,6 @@ namespace DatingApp.Contracts
         Task<PhotoForDetailedDto> SetMainPhoto(int id);
         Task<bool> UpdateExistingMainPhoto(int userId);
         Task<bool> IsMainPhoto(int id);
-        Task<bool> DeletePhoto(int userId, int id);
+        Task<bool> DeletePhoto(int id);
     }
 }
